@@ -12,6 +12,10 @@ Default values can be seen at the [defaults
 file](roles/wildfly/defaults/main.yml). There are some other variables listed,
 but should be considered as private variables.
 
+In the provided [playbook sample](wildfly-playbook.yml), the JDR report may
+fail to generate because WildFly may haven't booted up complety by the time the
+request is sent.
+
 # Attributions
 
 This work is mostly based on [jmazzitelli
