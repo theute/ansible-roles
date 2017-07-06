@@ -1,0 +1,16 @@
+localhost ansible_connection=local
+
+[all:vars]
+wildfly_home_dir=/tmp/wildfly
+wildfly_jdr_dest=/tmp/jdr_reports
+
+# If you want to specify an offset from default listen ports, uncomment an set.
+#wildfly_port_offset: 0 
+
+# If you want to specify bind address, uncomment an set.
+#wildfly_bind_address: "127.0.0.1"
+
+# If domain mode is desired, uncomment
+#wildfly_mode=domain
+#wildfly_target_server=server-one # For JDR Report
+

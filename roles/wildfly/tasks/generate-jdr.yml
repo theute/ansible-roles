@@ -1,0 +1,20 @@
+---
+- name: Generate JDR report for WildFly server
+  shell: "sleep 10 && {{wildfly_home_dir}}/bin/jboss-cli.sh
+    --connect
+    controller=localhost:{{wildfly_management_port}}
+    command={{wildfly_cli_commands.generate_jdr[wildfly_mode]}}
+    | grep 'report-location'
+    | sed 's/.*=> \"\\(.*\\)\"/\\1/'"
+  register: wildfly_jdr_report_result
+
+- name: Fetch JDR report from WildFly server
+  fetch:
+    src: "{{wildfly_jdr_report_result.stdout|mandatory}}"
+    dest: "{{wildfly_jdr_dest|mandatory}}/{{ansible_fqdn}}/{{wildfly_target_server}}/"
+    flat: yes
+
+- name: Delete JDR report from WildFly server
+  file:
+    path: "{{wildfly_jdr_report_result.stdout}}"
+    state: absent

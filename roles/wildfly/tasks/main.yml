@@ -1,0 +1,7 @@
+---
+- include: start-server.yml
+  when: wildfly_operation == "start"
+- include: stop-server.yml
+  when: wildfly_operation == "stop"
+- include: generate-jdr.yml
+  when: wildfly_operation == "generate-jdr"

@@ -1,0 +1,21 @@
+---
+wildfly_mode: standalone
+wildfly_home_dir: /opt/wildfly
+wildfly_port_offset: 0
+wildfly_bind_address: "{{ansible_default_ipv4.address}}"
+wildfly_operation: start
+wildfly_target_server: ""
+
+wildfly_start_scripts:
+  standalone: "{{wildfly_home_dir}}/bin/standalone.sh"
+  domain: "{{wildfly_home_dir}}/bin/domain.sh"
+wildfly_cli_commands:
+  shutdown:
+    standalone: /:shutdown
+    domain: /host=master/:shutdown
+  generate_jdr:
+    standalone: /subsystem=jdr:generate-jdr-report
+    domain: /host=master/server={{wildfly_target_server}}/subsystem=jdr:generate-jdr-report
+
+wildfly_startup_script: "{{ wildfly_start_scripts[wildfly_mode] }}"
+wildfly_management_port: "{{ 9990 + wildfly_port_offset|int }}"
