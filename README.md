@@ -7,6 +7,9 @@ Example [playbook](wildfly-playbook.yml) and [inventory](wildfly-inventory)
 files are provided. The provided example playbook starts a server, generates
 the JDR report and stops the server. 
 
+To test, install Wildfly in /tmp/wildfly then execute the following command:
+`ansible-playbook wildfly-playbook.yml -i wildfly-inventory`
+
 Available role variables are listed in [inventory](wildfly-inventory) file.
 Default values can be seen at the [defaults
 file](roles/wildfly/defaults/main.yml). There are some other variables listed,
